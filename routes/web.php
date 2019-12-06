@@ -12,14 +12,24 @@
 */
 Auth::routes();
 Route::group(['middleware' => 'auth'],function(){
-    Route::get('/', function () {
-        return view('dashboard');
-    });
+    
     Route::get('profile','ProfileController@editProfile');
     Route::put('update_profile','ProfileController@updateProfile');
     Route::patch('changepassword','ProfileController@changePassword');
+    Route::get('/', function () {
+        return view('dashboard');
+    });
+
+    Route::group(['middleware'=>'admin'], function(){
+        Route::resource('categories','CategoryController');
+    });
 
 });
+
+Route::get('/nopermission',function() {
+    return view('nopermission');
+});
+
 Route::get('/test', function() {
-    return view('profiles.profile');
+    return view('nopermission');
 });

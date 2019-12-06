@@ -2,7 +2,7 @@
 <html>
 @include('layouts.style')
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<div class="wrapper skin-yellow-light">
 
   @include('layouts.header')
   <!-- Left side column. contains the logo and sidebar -->
