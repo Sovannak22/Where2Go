@@ -1,4 +1,5 @@
-
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- jQuery 3 -->
 <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -40,7 +41,11 @@
 <script src="{{asset('bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script src="{{asset('js/notiflix-1.9.1.js')}}"></script>
+<!-- browse multiple image -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script src="{{asset('js/multipleImage.js')}}"></script>
+
 @yield('script')
