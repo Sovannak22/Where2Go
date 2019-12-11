@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserType extends Model
 {
     //
+    protected $guarded = [];
 
     public function user()
     {

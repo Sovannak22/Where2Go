@@ -16,9 +16,9 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('profile','ProfileController@editProfile');
     Route::put('update_profile','ProfileController@updateProfile');
     Route::patch('changepassword','ProfileController@changePassword');
-    Route::get('/', function () {
-        return view('dashboard');
-    });
+    // Route::get('/', function () {
+    //     return view('dashboard');
+    // });
     //Post
     Route::post('events/create','EventController@store');
     Route::get('events/create','EventController@create');
@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('feedback/create','feedbackController@create');
     Route::post('feedback/create','feedbackController@store');
     //category
+    Route::get('/', 'Controller@home');
+
     Route::group(['middleware'=>'admin'], function(){
         Route::resource('categories','CategoryController');
         Route::resource('users','UserController');
@@ -38,5 +40,5 @@ Route::get('/nopermission',function() {
 });
 
 Route::get('/test', function() {
-    return view('nopermission');
+    return view('auth.register');
 });

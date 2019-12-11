@@ -22,10 +22,7 @@
                     >
                         <i class="fa fa-fw fa-power-off"></i> Logout
                     </a>
-                    <form id="logout-form" action="{{ url('admin/logout') }}" method="POST" style="display: none;">
-                        @if(config('adminlte.logout_method'))
-                            {{ method_field(config('adminlte.logout_method')) }}
-                        @endif
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                 </li>
