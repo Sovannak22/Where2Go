@@ -19,9 +19,13 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('/', function () {
         return view('dashboard');
     });
+    //Post
+    Route::post('events/create','EventController@store');
     Route::get('events/create','EventController@create');
+    //feedback
     Route::get('feedback/create','feedbackController@create');
     Route::post('feedback/create','feedbackController@store');
+    //category
     Route::group(['middleware'=>'admin'], function(){
         Route::resource('categories','CategoryController');
     });
