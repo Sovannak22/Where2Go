@@ -11,6 +11,9 @@
             @if (Auth::user()->id==2)
                 <li class="{{request()->is('feedback/create*')? 'active':''}}"><a href="{{url('feedback/create')}}"><i class="fa fa-comment"></i> <span>Feedback</span></a></li>
             @endif
+            @if (Auth::user()->id==1)
+                <li class="{{request()->is('feedback/manage*')? 'active':''}}"><a href="{{url('feedback/manage')}}"><i class="fa fa-comment"></i> <span>Feedback</span></a></li>
+            @endif
             <li class="treeview {{request()->is('admin/posts*')? 'active':''}}">
                 <a href="#">
                     <i class="fa fa-sticky-note-o"></i> <span>Post</span>

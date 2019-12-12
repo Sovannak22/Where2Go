@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth'],function(){
 
 });
 
+Route::get('feedback/manage','feedbackController@index');
+
 Route::get('/nopermission',function() {
     return view('nopermission');
 });

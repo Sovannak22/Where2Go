@@ -9,6 +9,10 @@ use Auth;
 
 class feedbackController extends Controller
 {
+    public function index(){
+        $feedbacks = Feedback::all();
+        return view('feedback.index',compact('feedbacks'));
+    }
     public function create()
     {
         //
