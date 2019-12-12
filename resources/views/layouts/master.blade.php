@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 @include('layouts.style')
+<link rel="icon" href="{{ asset('sitephoto.jpg') }}">
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper skin-yellow-light">
 
