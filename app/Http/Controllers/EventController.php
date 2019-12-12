@@ -47,4 +47,20 @@ class EventController extends Controller
         Session::flash('Event','Event send successfully');
         return back();
     }
+
+    public function index()
+    {
+        //
+        $event = Event::all();
+        return view('event.index',compact('event'));
+        // return view('event.index');
+
+    }
+
+    public function destroy($id)
+    {
+        Event::findOrFail($id)->delete();
+        return response()->json();
+
+    }
 }

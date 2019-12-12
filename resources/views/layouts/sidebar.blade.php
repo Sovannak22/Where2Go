@@ -7,13 +7,17 @@
             <li class="{{request()->is('users*')? 'active':''}}"><a href="{{url('users')}}"><i class="fa fa-user"></i> <span>Users</span></a></li>
 
             <li class="{{request()->is('events/create*')? 'active':''}}"><a href="{{url('events/create')}}"><i class="fa fa-edit"></i> <span>Create Post</span></a></li>
+            @endif
             @if (Auth::user()->id==2)
                 <li class="{{request()->is('feedback/create*')? 'active':''}}"><a href="{{url('feedback/create')}}"><i class="fa fa-comment"></i> <span>Feedback</span></a></li>
-            <li class="{{request()->is('categories*')? 'active':''}}"><a href="{{url('categories')}}"><i class="fa fa-cubes"></i> <span>Categories</span></a></li>                
+                <li class="{{request()->is('categories*')? 'active':''}}"><a href="{{url('categories')}}"><i class="fa fa-cubes"></i> <span>Categories</span></a></li>               
             @endif
-            <li class="treeview {{request()->is('admin/posts*')? 'active':''}}">
-                <a href="#">
+
+            <li class="{{request()->is('events*')? 'active':''}}"><a href="{{url('events/post')}}"><i class="fa fa-sticky-note-o"></i> <span>Post</span></a></li>
+            {{-- <li class="treeview {{request()->is('admin/posts*')? 'active':''}}">
+                <a href="">
                     <i class="fa fa-sticky-note-o"></i> <span>Post</span>
+        
                     <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -22,7 +26,7 @@
                     <li class="{{request()->is('admin/posts/emergency*')? 'active':''}}"><a href="#"><i class="fa fa-ambulance"></i> Emergency</a></li>
                     <li class="{{request()->is('admin/posts/qa*')? 'active':''}}"><a href="#"><i class="fa fa-question-circle-o"></i> Q & A</a></li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
     </section>
 </aside>
