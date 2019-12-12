@@ -46,7 +46,7 @@
                     <th style="text-align: center">
                         <div class="row">
                             <div class="col-md-6">
-                                <a href='{{url("event/$event->id/edit")}}'><div class="btn btn-primary">Edit</div></a> 
+                                <a href='{{url("events/$event->id/edit")}}'><div class="btn btn-primary">Edit</div></a> 
                             </div>
                             <div class="col-md-6">
                                 <a value="{{$event->id}}" class="delete"><div class="btn btn-danger">Delete</div></a>

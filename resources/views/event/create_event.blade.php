@@ -16,7 +16,7 @@
             <div class="box-header with-border" style="padding:30px">
                 <h3 class="box-title">Create Event</h3>
             </div>
-            <form action="{{url('events/create')}}" style="padding:30px" method="POST">
+            <form action="{{url('events')}}" style="padding:30px" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">
                 <label for="title">Title:</label>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="form-group">
                     <label for="location">Location:</label>
-                    <input type="url" name="location" placeholder="https://goo.gl/maps/zFTSnk3ZunBYPerk8" class="form-control" id="location">
+                    <input type="text" name="location" placeholder="https://goo.gl/maps/zFTSnk3ZunBYPerk8" class="form-control" id="location" required>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3">Description:</label>

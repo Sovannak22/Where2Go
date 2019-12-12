@@ -20,10 +20,8 @@ Route::group(['middleware' => 'auth'],function(){
     //     return view('dashboard');
     // });
     //Post
-    Route::post('events/create','EventController@store');
-    Route::get('events/create','EventController@create');
-    Route::get('events/post','EventController@index');
-    Route::delete('events/{id}','EventController@destroy');
+
+    Route::resource('events','EventController');
     //feedback
     Route::get('feedback/create','feedbackController@create');
     Route::post('feedback/create','feedbackController@store');

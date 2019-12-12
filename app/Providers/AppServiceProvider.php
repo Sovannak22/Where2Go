@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         
 
-        View::composer(['event.create_event'],function ($view){
+        View::composer(['event.create_event','event.edit'],function ($view){
             $view->with('categories',Category::all());
         });
     }

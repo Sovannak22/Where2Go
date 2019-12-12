@@ -27,7 +27,8 @@ class EventController extends Controller
             'end_date' => 'required',
             'price' => 'required',
             'contact' => 'required',
-            'categories_id' => 'required'
+            'categories_id' => 'required',
+            'location' => 'required'
         ]);
         $event = new Event();
         $event->title = $request->title;
@@ -56,6 +57,40 @@ class EventController extends Controller
         // return view('event.index');
 
     }
+
+    public function edit($event)
+    {
+        //
+        $event = Event::find($event);
+        // dd($event);
+        return view('event.edit',compact('event'));
+    }
+
+    public function show(){
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validate = $request->validate([
+            'title' => 'required',
+            'include' => 'required',
+            'duration' => 'required',
+            'categories_id' => 'required',
+            'price' => 'required',
+            'limitation' => '',
+            'contact' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'transpotation' => 'required',
+            'location' => '',
+            'description' => ''
+        ]);
+        Event::where('id',$id)->update($validate);
+        Session::flash('edit_event','event Saved Successfully');
+        return redirect(url('events'));
+    }
+
 
     public function destroy($id)
     {
