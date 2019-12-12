@@ -7,6 +7,26 @@
 <div class="box">
     <div class="box-header">
         <h3 class="box-title">User</h3>
+        <form class="form-inline" action="{{url('/users')}}">
+            <div class="form-group">
+                <input name="name" type="name" class="form-control" id="name" placeholder="Fullname" value="{{@$_GET['name']}}">
+            </div>
+            <div class="form-group">
+                <input name="email" type="email" class="form-control" id="email" placeholder="Email" value="{{@$_GET['email']}}">
+            </div>
+            <div class="form-group">
+                <input name="phone_number" type="tel" class="form-control" id="phone_number" placeholder="Phone number" value="{{@$_GET['phone_number']}}">
+            </div>
+            <div class="form-group">
+                <select name="user_type" id="" class="form-control">
+                    <option value="">--User Type--</option>
+                    @foreach ($user_types as $ut)
+                        <option value="{{$ut->id}}" {{(@$_GET['user_type']== $ut->id)?'selected':''}} >{{$ut->user_type}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -33,9 +53,6 @@
                     <td style="width:15%">{{$user->usertype->user_type}}</td>
                     <th style="width:15%;text-align: center">
                         <div class="row">
-                            {{-- <div class="col-md-6">
-                                <a href='{{url("users/$user->id/edit")}}'><div class="btn btn-primary">Edit</div></a> 
-                            </div> --}}
                             <div class="col-md-6">
                                 <a value="{{$user->id}}" class="delete"><div class="btn btn-danger">Delete</div></a>
                             </div>
@@ -48,6 +65,9 @@
         </tfoot>
         </table>
     </div>
+    <div class="box-footer">
+        {{$users->links()}}
+    </div>
     <!-- /.box-body -->
 </div>
 
@@ -56,14 +76,10 @@
 @section('script')
 <script>
     $(document).ready(function(){
-            
-            // console.log(session);
-            $('#example1').DataTable()
             $('.delete').click(function(){
                 var val = $(this).attr('value');
                 var url = window.location.origin+"/users/"+val;
-                console.log(url);
-                 Notiflix.Confirm.Show( 'Delete User', 'Are you sure to delete this user?', 'Yes', 'No', function(){ // Yes button callback 
+                 Notiflix.Confirm.Show( 'Delete User', 'Are you sure to delete this user?', 'Yes', 'No', function(){
                     $.ajax({
                         type:'POST',
                         url: url,
@@ -72,13 +88,12 @@
                             Notiflix.Notify.Success("User deleted success fully");
                             $('#tr'+val).remove();
                         },error:function(){
-                            // You can type your text in String format.
                             Notiflix.Notify.Failure('Oops something went wrong!');
                         }
                     })
                  }, 
-                 function(){ // No button callback 
-                    alert('If you say so...'); 
+                 function(){
+                    
                  }); 
             });
     })

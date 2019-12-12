@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\UserType;
+
 class UserController extends Controller
 {
      /**
@@ -11,11 +13,30 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $users = User::all();
-        return view('users.index',compact('users'));
+        $name = $request->name;
+        $email = $request->email;
+        $tel = $request->phone_number;
+        $user_type = $request->user_type;
+
+        $users = User::orderBy('name','asc');
+        if(!empty($name)){
+            $users= $users->where('name','like',"%$name%");
+        }
+        if (!empty($email)){
+            $users = $users->where('email',$email);
+        }
+        if (!empty($tel)){
+            $users = $users->where('phone_number',$tel);
+        }
+        if (!empty($user_type)){
+            $users = $users->where('user_type',$user_type);
+        }
+        $users = $users->paginate(10);
+        $user_types = UserType::all();
+        return view('users.index',compact('users','user_types'));
     }
 
     /**
