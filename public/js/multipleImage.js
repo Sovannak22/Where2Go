@@ -1,24 +1,28 @@
 $(document).ready(function() {
+
     document.getElementById('pro-image').addEventListener('change', readImage, false);
     
     $( ".preview-images-zone" ).sortable();
     
     $(document).on('click', '.image-cancel', function() {
         let no = $(this).data('no');
+        console.log(no);
         $(".preview-image.preview-show-"+no).remove();
+        num--;
+        images.splice(no, 1);
     });
 });
 
 
-
-var num = 4;
+var images=[];
+var num = 0;
 function readImage() {
     if (window.File && window.FileList && window.FileReader) {
         var files = event.target.files; //FileList object
         var output = $(".preview-images-zone");
-
         for (let i = 0; i < files.length; i++) {
             var file = files[i];
+            images.push(file);
             if (!file.type.match('image')) continue;
             
             var picReader = new FileReader();
@@ -36,10 +40,32 @@ function readImage() {
             });
 
             picReader.readAsDataURL(file);
+            console.log(images);
         }
         $("#pro-image").val('');
     } else {
         console.log('Browser not support');
     }
 }
+
+$('#event_upload').submit( function (){
+    console.log(images);
+    var formData = new FormData(this);
+    for (i=0;i<images.length;i++){
+        formData.append('image_'+i,images[i]);
+    }
+    // return false;
+    $.ajax({
+        url: window.location.origin+"/events/create",
+        type: 'POST',
+        data: formData,
+        success: function (data) {
+            alert(data)
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+    return false;
+});
 

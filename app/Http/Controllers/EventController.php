@@ -16,6 +16,7 @@ class EventController extends Controller
     }
     public function store(Request $request)
     {
+        dd($request->image_0);
         //
         $validate = $request->validate([
             'title' => 'required',
