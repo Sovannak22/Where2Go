@@ -18,7 +18,7 @@ var images=[];
 var num = 0;
 function readImage() {
     if (window.File && window.FileList && window.FileReader) {
-        var files = event.target.files; //FileList object
+        var files = event.target.files;
         var output = $(".preview-images-zone");
         for (let i = 0; i < files.length; i++) {
             var file = files[i];
@@ -38,9 +38,7 @@ function readImage() {
                 output.append(html);
                 num = num + 1;
             });
-
             picReader.readAsDataURL(file);
-            console.log(images);
         }
         $("#pro-image").val('');
     } else {
@@ -49,18 +47,17 @@ function readImage() {
 }
 
 $('#event_upload').submit( function (){
-    console.log(images);
     var formData = new FormData(this);
     for (i=0;i<images.length;i++){
         formData.append('image_'+i,images[i]);
+        formData.append('size_images',images.length);
     }
-    // return false;
     $.ajax({
-        url: window.location.origin+"/events/create",
+        url: window.location.origin+"/events",
         type: 'POST',
         data: formData,
         success: function (data) {
-            alert(data)
+            window.location.href = window.location.origin+"/events"
         },
         cache: false,
         contentType: false,

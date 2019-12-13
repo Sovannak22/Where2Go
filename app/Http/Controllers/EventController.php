@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Event;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use Image;
+
 
 class EventController extends Controller
 {
@@ -16,9 +18,7 @@ class EventController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->image_0);
-        //
-        $validate = $request->validate([
+        $request->validate([
             'title' => 'required',
             'description' => 'required',
             'duration' => 'required',
@@ -47,23 +47,28 @@ class EventController extends Controller
         $event->user_id=Auth::user()->id;
         $event->save();
         Session::flash('Event','Event send successfully');
-        return back();
+        if ($request->hasFile('image_0')){
+            for ($i=0;$i<$request->size_images;$i++){
+                $image = $request->file("image_$i");
+                $extension = $image->getClientOriginalExtension();
+                $filename = Auth::user()->name."_$i".time().".".$extension;
+                $event->images()->create(['url'=>'events_images/'.$filename]);
+                $image=Image::make($image)->fit(500,350)->save(public_path('storage/events_images/'.$filename));
+            }
+        }
+        return response()->json();
     }
 
     public function index()
     {
-        //
         $event = Event::all();
         return view('event.index',compact('event'));
-        // return view('event.index');
 
     }
 
     public function edit($event)
     {
-        //
         $event = Event::find($event);
-        // dd($event);
         return view('event.edit',compact('event'));
     }
 
