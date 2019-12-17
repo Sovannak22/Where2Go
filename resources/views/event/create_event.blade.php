@@ -81,7 +81,7 @@
                     </div>
                 <div class="form-group" style="text-align:end">
                         <div class="col-sm-2"></div>
-                        <button type="submit" class="btn btn-success" >Submit</button>
+                        <button type="submit" id="submit" value="/events" class="btn btn-success" >Submit</button>
                 </div>
             </form>
         </div>

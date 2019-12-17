@@ -71,7 +71,7 @@
                 var val = $(this).attr('value');
                 var url = window.location.origin+"/categories/"+val;
                 console.log(url);
-                 Notiflix.Confirm.Show( 'Delete Category', 'Are you sure to delete this category?', 'Yes', 'No', function(){ // Yes button callback 
+                Notiflix.Confirm.Show( 'Delete Category', 'Are you sure to delete this category?', 'Yes', 'No', function(){ // Yes button callback 
                     $.ajax({
                         type:'POST',
                         url: url,

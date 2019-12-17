@@ -46,14 +46,15 @@ function readImage() {
     }
 }
 
-$('#event_upload').submit( function (){
+$('#event_upload').submit(function (){
+    var url = $('#submit').attr('value');
     var formData = new FormData(this);
     for (i=0;i<images.length;i++){
         formData.append('image_'+i,images[i]);
         formData.append('size_images',images.length);
     }
     $.ajax({
-        url: window.location.origin+"/events",
+        url: window.location.origin+url,
         type: 'POST',
         data: formData,
         success: function (data) {

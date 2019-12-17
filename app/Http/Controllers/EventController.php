@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Auth;
+use Illuminate\Support\Facades\File;
 use Image;
 
 
@@ -92,9 +94,27 @@ class EventController extends Controller
             'location' => '',
             'description' => ''
         ]);
-        Event::where('id',$id)->update($validate);
+        $event = Event::find($id);
+        $event->update($validate);
+        if ($request->hasFile('image_0')){
+            $pre_images = Event::find($id)->images;
+            if (count($pre_images)>0){
+                foreach ($pre_images as $image){
+                    Storage::delete(('public\\'.$image->url));
+                    $image->delete();
+                }
+                
+            }
+            for ($i=0;$i<$request->size_images;$i++){
+                $image = $request->file("image_$i");
+                $extension = $image->getClientOriginalExtension();
+                $filename = Auth::user()->name."_$i".time().".".$extension;
+                $event->images()->create(['url'=>'events_images/'.$filename]);
+                $image=Image::make($image)->fit(500,350)->save(public_path('storage/events_images/'.$filename));
+            }
+        }
         Session::flash('edit_event','event Saved Successfully');
-        return redirect(url('events'));
+        return response()->json();
     }
 
 

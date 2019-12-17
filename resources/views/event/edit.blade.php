@@ -15,7 +15,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form action="{{url('events/'.$event->id)}}" style="padding:30px" method="POST">
+          <form id="event_upload" style="padding:30px" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{method_field('PATCH')}}
             <div class="form-group">
@@ -127,8 +127,8 @@
             </div>
             <div class="form-group">
                     <fieldset class="form-group">
-                        <a href="javascript:void(0)" onclick="$('#pro-image').click()">Upload Image</a>
-                        <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control"  multiple >
+                        <a id="upload_image" href="javascript:void(0)">Upload Image</a>
+                        <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control"  multiple>
                     </fieldset>
                     <div class="preview-images-zone">
                         
@@ -136,11 +136,24 @@
                 </div>
             <div class="form-group" style="text-align:end">
                     <div class="col-sm-2"></div>
-                    <button type="submit" class="btn btn-success" >Submit</button>
+                    <button type="submit" id="submit" value="/events/{{$event->id}}" class="btn btn-success" >Submit</button>
             </div>
         </form>
         </div>
     </div>
     <div class="col-md-3"></div>
   </div>    
+@endsection
+
+@section('script')
+    <script>
+        $('#upload_image').click(function(){
+            Notiflix.Confirm.Show( 'Image uploading', 'If you upload new image your previous image will automatic clear from your event...', 'Yes', 'No', function(){ // Yes button callback 
+                $('#pro-image').click()
+            }, 
+            function(){ // No button callback 
+                
+            }); 
+        })
+    </script>
 @endsection
