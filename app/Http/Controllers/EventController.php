@@ -63,7 +63,11 @@ class EventController extends Controller
 
     public function index()
     {
-        $event = Event::all();
+        if (Auth::user()->user_type == 1){
+            $event = Event::all();
+        }else{
+            $event = Event::where('user_id',Auth::user()->id);
+        }
         return view('event.index',compact('event'));
 
     }
