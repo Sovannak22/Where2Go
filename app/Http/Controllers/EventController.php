@@ -54,7 +54,7 @@ class EventController extends Controller
                 $image = $request->file("image_$i");
                 $extension = $image->getClientOriginalExtension();
                 $filename = Auth::user()->name."_$i".time().".".$extension;
-                $event->images()->create(['url'=>'events_images/'.$filename]);
+                $event->images()->create(['url'=>'storage/events_images/'.$filename]);
                 $image=Image::make($image)->fit(500,350)->save(public_path('storage/events_images/'.$filename));
             }
         }
@@ -78,8 +78,10 @@ class EventController extends Controller
         return view('event.edit',compact('event'));
     }
 
-    public function show(){
-
+    public function show($event){
+        $event = Event::find($event);
+        // dd($event->images);
+        return view ('event.show',compact('event'));
     }
 
     public function update(Request $request, $id)
