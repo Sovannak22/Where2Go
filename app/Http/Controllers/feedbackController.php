@@ -9,6 +9,13 @@ use Auth;
 
 class feedbackController extends Controller
 {
+    public function index(){
+        $feedbacks = Feedback::all();
+        return view('feedback.index',compact('feedbacks'));
+    }
+    public function show(){
+
+    }
     public function create()
     {
         //
@@ -28,6 +35,9 @@ class feedbackController extends Controller
         $feedback->save();
         Session::flash('Feedback','Feedback send successfully');
         return back();
+    }
+    public function destroy(){
+        
     }
 
 }

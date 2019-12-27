@@ -5,6 +5,7 @@
             <li class="{{request()->route()->getName() == 'home' ? 'active' : ''}}"><a href="{{url('')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
             @if (Auth::user()->user_type == 1)
             <li class="{{request()->is('users*')? 'active':''}}"><a href="{{url('users')}}"><i class="fa fa-user"></i> <span>Users</span></a></li>
+            <li class="{{request()->is('feedbacks*')? 'active':''}}"><a href="{{url('feedback/')}}"><i class="fa fa-comment"></i> <span>Feedback</span></a></li>
             <li class="{{request()->is('categories*')? 'active':''}}"><a href="{{url('categories')}}"><i class="fa fa-cubes"></i> <span>Categories</span></a></li>
             @endif
             @if (Auth::user()->user_type==2)

@@ -38,6 +38,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function feedbacks(){
+        $this->hasMany('App\Feedback');
+    }
     public function usertype()
     {
         return $this->belongsTo('App\UserType','user_type');

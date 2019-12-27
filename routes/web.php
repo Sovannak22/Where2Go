@@ -23,8 +23,7 @@ Route::group(['middleware' => 'auth'],function(){
 
     Route::resource('events','EventController');
     //feedback
-    Route::get('feedback/create','feedbackController@create');
-    Route::post('feedback/create','feedbackController@store');
+    Route::resource('feedback','feedbackController');
     //category
     Route::get('/', 'Controller@home');
 

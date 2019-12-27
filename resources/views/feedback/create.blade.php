@@ -14,7 +14,7 @@
             <div class="box-header with-border" style="padding:30px">
                 <h3 class="box-title">Feedback</h3>
             </div>
-            <form action="{{url('feedback/create')}}" style="padding:30px" method="POST">
+            <form action="{{url('feedback')}}" style="padding:30px" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">
                 <label for="Name">Title:</label>

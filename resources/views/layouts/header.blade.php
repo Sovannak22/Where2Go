@@ -9,6 +9,7 @@
         </a>
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <li><a href="{{url('profile')}}"><i class="fa fa-fw fa-user"></i>Profile</a></li>
                 <li>
                     <a href="#"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"

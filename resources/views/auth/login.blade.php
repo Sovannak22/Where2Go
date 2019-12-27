@@ -34,7 +34,8 @@
                                 @endif
                             </div>
                             <button type="submit" class="btn btn-primary">SIGN IN</button>
-                        </form>                 
+                        </form>  
+                        <div class="mt-5">Don't have account yet?<a href="{{url('register')}}"><b>Signup</b></a></div>               
                     </div>
                 </div>
             </div>
