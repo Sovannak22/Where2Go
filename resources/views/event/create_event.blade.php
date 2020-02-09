@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <label for="price">Price:</label>
-                    <input type="text" name="price" placeholder="enter your price here" class="form-control" id="price" required>
+                    <input type="number" name="price" placeholder="enter your price here" class="form-control" id="price" required>
                 </div>
                 <div class="form-group">
                     <label for="limit">Limit:</label>

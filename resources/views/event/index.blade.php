@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 
-                @foreach ($event as $event)
+                @foreach ($events as $event)
                     <tr id="tr{{$event->id}}" value="{{$event->id}}" class="list_event">
                         <th >{{$event->id}}</th>
                         <td >{{$event->title}}</td>

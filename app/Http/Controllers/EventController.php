@@ -7,7 +7,6 @@ use App\Event;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Auth;
-use Illuminate\Support\Facades\File;
 use Image;
 
 
@@ -64,11 +63,11 @@ class EventController extends Controller
     public function index()
     {
         if (Auth::user()->user_type == 1){
-            $event = Event::all();
+            $events = Event::all();
         }else{
-            $event = Event::where('user_id',Auth::user()->id);
+            $events = Event::where('user_id',Auth::user()->id)->get();
         }
-        return view('event.index',compact('event'));
+        return view('event.index',compact('events'));
 
     }
 

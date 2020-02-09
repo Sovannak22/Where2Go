@@ -57,7 +57,7 @@
         <div class="row">
             <h3 class="col-md-12"><b> Image </b></h3>
             @foreach ($event->images as $image)
-            <img class="col-md-3 col-sm-3" style="height:auto" src='{{url($image->url)}}'>
+            <img class="col-md-3 col-sm-3" style="height:auto;margin-top:10px" src='{{url($image->url)}}'>
             @endforeach
         </div>
     </div>

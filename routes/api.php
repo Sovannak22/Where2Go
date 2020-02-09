@@ -18,3 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('login', 'API\AuthController@login');
 Route::post('signup', 'API\AuthController@signup');
+
+Route::get('home_events','API\EventController@homeEvents');
+
+Route::get('categories','API\CategoryController@index');
