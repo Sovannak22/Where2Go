@@ -20,5 +20,6 @@ Route::post('login', 'API\AuthController@login');
 Route::post('signup', 'API\AuthController@signup');
 
 Route::get('home_events','API\EventController@homeEvents');
+Route::get('events/{id}','API\EventController@show');
 
 Route::get('categories','API\CategoryController@index');

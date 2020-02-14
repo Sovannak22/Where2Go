@@ -16,6 +16,18 @@ class EventController extends Controller
             $image = Image::where('imageable_id',$event->id)->first();
             $event->image_url = $image->url;
         }
-        dd($events);
+
+        return response()->json($events);
+    }
+
+    public function show($id){
+        $event = Event::find($id);
+        if (!empty($event)){
+            return response()->json($event);
+        }
+        return response()->json([
+            'message' => 'Event could not find'
+        ]);
+        
     }
 }
