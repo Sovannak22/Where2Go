@@ -40,7 +40,7 @@
                     <td >{{$event->contact}}</td>
                     <td >{{$event->limitation}}</td>
                     <td >{{$event->description}}</td>
-                    <td >{{$event->transportation}}</td>
+                    <td >{{$event->transpotation}}</td>
                     <td >{{$event->price}}</td>
                     <td >{{$event->categories->category}}</td>
                     <th style="text-align: center">
