@@ -29,7 +29,7 @@ class UserController extends Controller
             $users = $users->where('email',$email);
         }
         if (!empty($tel)){
-            $users = $users->where('phone_number',$tel);
+            $users = $users->where('contact',$tel);
         }
         if (!empty($user_type)){
             $users = $users->where('user_type',$user_type);
@@ -64,12 +64,12 @@ class UserController extends Controller
             'email' => 'required',
             'phone_number' => '',
             'user_type' => ''
-            
+
         ]);
 
         $user = new User($validate);
         $user->save();
-        
+
         return back();
     }
 

@@ -46,24 +46,56 @@ class EventController extends Controller
         $event->contact = $request->contact;
         $event->price = $request->price;
         $event->categories_id = $request->categories_id;
-        $event->user_id=Auth::user()->id;
+        // $event->user_id=Auth::user()->id;
         $event->save();
         Session::flash('Event','Event send successfully');
-        if ($request->hasFile('image_0')){
-            for ($i=0;$i<$request->size_images;$i++){
-                $image = $request->file("image_$i");
-                $extension = $image->getClientOriginalExtension();
-                $filename = Auth::user()->name."_$i".time().".".$extension;
-                $event->images()->create(['url'=>'events_images/'.$filename]);
-                $image=Image::make($image)->fit(500,350)->save(public_path('storage/events_images/'.$filename));
-            }
-        }
+        // if ($request->hasFile('image_0')){
+        //     for ($i=0;$i<$request->size_images;$i++){
+        //         $image = $request->file("image_$i");
+        //         $extension = $image->getClientOriginalExtension();
+        //         $filename = Auth::user()->name."_$i".time().".".$extension;
+        //         $event->images()->create(['url'=>'events_images/'.$filename]);
+        //         $image=Image::make($image)->fit(500,350)->save(public_path('storage/events_images/'.$filename));
+        //     }
+        // }
         return response()->json();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $event = Event::all();
+        $title = $request->title;
+        $price = $request->price;
+        $tel = $request->phone_number;
+        $categories = $request->categories;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        
+        $event = Event::orderBy('created_at','desc');
+        if(!empty($title)){
+            $event= $event->where('title','like',"%$title%");
+        }
+        if (!empty($price)){
+            // dd($price);
+            $event = $event->where('price',$price);
+        }
+        if (!empty($tel)){
+            $event = $event->where('contact',$tel);
+        }
+        if (!empty($categories)){
+            $event = $event->where('categories_id',$categories);
+        }
+
+        if (!empty($start_date)){
+            $event = $event->where('start_date', $start_date);
+            
+        }
+        
+        if (!empty($end_date)){
+            $event = $event->where('end_date', $end_date);
+        }
+        
+        // $users = $users->paginate(10);
+        $event = $event->get();
         return view('event.index',compact('event'));
 
     }
@@ -103,15 +135,14 @@ class EventController extends Controller
                     Storage::delete(('public\\'.$image->url));
                     $image->delete();
                 }
-                
             }
-            for ($i=0;$i<$request->size_images;$i++){
-                $image = $request->file("image_$i");
-                $extension = $image->getClientOriginalExtension();
-                $filename = Auth::user()->name."_$i".time().".".$extension;
-                $event->images()->create(['url'=>'events_images/'.$filename]);
-                $image=Image::make($image)->fit(500,350)->save(public_path('storage/events_images/'.$filename));
-            }
+            // for ($i=0;$i<$request->size_images;$i++){
+            //     $image = $request->file("image_$i");
+            //     $extension = $image->getClientOriginalExtension();
+            //     $filename = Auth::user()->name."_$i".time().".".$extension;
+            //     $event->images()->create(['url'=>'events_images/'.$filename]);
+            //     $image=Image::make($image)->fit(500,350)->save(public_path('storage/events_images/'.$filename));
+            // }
         }
         Session::flash('edit_event','event Saved Successfully');
         return response()->json();

@@ -91,9 +91,9 @@
                             Notiflix.Notify.Failure('Oops something went wrong!');
                         }
                     })
-                 }, 
+                 },
                  function(){
-                    
+
                  }); 
             });
     })
